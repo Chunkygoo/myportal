@@ -16,6 +16,14 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
   },
+  // Disable default pages
+  pages: {
+    signIn: "/",
+    signOut: "/",
+    error: "/",
+    verifyRequest: "/",
+    newUser: "/",
+  },
   // Configure one or more authentication providers
   adapter: PrismaAdapter(prisma),
   providers: [
