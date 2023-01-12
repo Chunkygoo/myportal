@@ -7,11 +7,15 @@ import { env } from "../../../env/server.mjs";
 import { prisma } from "../../../server/db";
 
 export const authOptions: NextAuthOptions = {
-  // Include user.id on session
+  // Include additional fields on session
   callbacks: {
     session({ session, user }) {
       if (session.user) {
         session.user.id = user.id;
+        session.user.name = user.name;
+        session.user.phoneNumber = user.phoneNumber;
+        session.user.company = user.company;
+        session.user.professionalRole = user.professionalRole;
       }
       return session;
     },
