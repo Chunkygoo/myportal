@@ -13,5 +13,15 @@ const config = {
     locales: ["en"],
     defaultLocale: "en",
   },
+  async redirects() {
+    return [
+      {
+        source: "/api/auth/signin", // since we disabled the default pages, the only way we get here is if we hit the OAuthAccountNotLinked error. If so,
+        // redirect to the error page with "?error=OAuthAccountNotLinked" (nextjs does this for us)
+        destination: "/error",
+        permanent: true,
+      },
+    ];
+  },
 };
 export default config;

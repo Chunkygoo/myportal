@@ -1,5 +1,7 @@
 import NextAuth, { type NextAuthOptions } from "next-auth";
 import DiscordProvider from "next-auth/providers/discord";
+import GoogleProvider from "next-auth/providers/google";
+
 // Prisma adapter for NextAuth, optional and can be removed
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 
@@ -20,13 +22,13 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
   },
-  // Disable default pages
+  // Disable default pages - https://next-auth.js.org/configuration/pages
   pages: {
     signIn: "/",
     signOut: "/",
-    error: "/",
-    verifyRequest: "/",
-    newUser: "/",
+    error: "/", // Error code passed in query string as ?error=
+    verifyRequest: "/", // (used for check email message)
+    newUser: "/", // New users will be directed here on first sign in (leave the property out if not of interest)
   },
   // Configure one or more authentication providers
   adapter: PrismaAdapter(prisma),
@@ -34,6 +36,10 @@ export const authOptions: NextAuthOptions = {
     DiscordProvider({
       clientId: env.DISCORD_CLIENT_ID,
       clientSecret: env.DISCORD_CLIENT_SECRET,
+    }),
+    GoogleProvider({
+      clientId: env.GOOGLE_CLIENT_ID,
+      clientSecret: env.GOOGLE_CLIENT_SECRET,
     }),
     /**
      * ...add more providers here
