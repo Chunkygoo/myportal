@@ -107,9 +107,7 @@ model SiteDiary {
     date           DateTime
     createdBy      User           @relation(fields: [createdById], references: [id], onDelete: Cascade)
     createdById    String
-    createdAt      DateTime       @default(now())
-    updatedAt      DateTime       @updatedAt
-    Project        Project        @relation(fields: [projectId], references: [id])
+    project        Project        @relation(fields: [projectId], references: [id])
     projectId      String
     weather        Weather?
     plants         Plant[]
@@ -117,6 +115,8 @@ model SiteDiary {
     materials      Material[]
     siteProblems   SiteProblem[]
     workProgresses WorkProgress[]
+    createdAt      DateTime       @default(now())
+    updatedAt      DateTime       @updatedAt
 
     @@index([projectId])
     @@index([createdById])
@@ -158,12 +158,12 @@ model Laborer {
 }
 
 model Material {
-    id          String    @id @default(cuid())
-    units       String
+    id          String       @id @default(cuid())
+    units       MaterialUnit
     amount      Int
-    siteDiary   SiteDiary @relation(fields: [siteDiaryId], references: [id], onDelete: Cascade)
+    siteDiary   SiteDiary    @relation(fields: [siteDiaryId], references: [id], onDelete: Cascade)
     siteDiaryId String
-    createdBy   User      @relation(fields: [createdById], references: [id], onDelete: Cascade)
+    createdBy   User         @relation(fields: [createdById], references: [id], onDelete: Cascade)
     createdById String
 
     @@index([siteDiaryId])
@@ -223,4 +223,11 @@ enum WeatherCondition {
     SUNNY
     CLOUDY
     RAINING
+}
+
+enum MaterialUnit {
+    M
+    M2
+    M3
+    NR
 }
