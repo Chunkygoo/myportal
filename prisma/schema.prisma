@@ -15,12 +15,6 @@ datasource db {
     relationMode = "prisma"
 }
 
-model Example {
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-}
-
 // Necessary for Next auth
 model Account {
     id                String   @id @default(cuid())
@@ -73,7 +67,7 @@ model User {
     createdMaterials      Material[]
     createdSiteProblems   SiteProblem[]
     createdWorkProgresses WorkProgress[]
-    UsersOnProjects       UsersOnProjects[]
+    projects              UsersOnProjects[]
     createdAt             DateTime          @default(now())
     updatedAt             DateTime          @default(now()) @updatedAt
 }
@@ -89,14 +83,14 @@ model VerificationToken {
 }
 
 model Project {
-    id              String            @id @default(cuid())
-    name            String
-    createdBy       User              @relation(fields: [createdById], references: [id], onDelete: Cascade)
-    createdById     String
-    siteDiaries     SiteDiary[]
-    UsersOnProjects UsersOnProjects[]
-    createdAt       DateTime          @default(now())
-    updatedAt       DateTime          @updatedAt
+    id          String            @id @default(cuid())
+    name        String
+    createdBy   User              @relation(fields: [createdById], references: [id], onDelete: Cascade)
+    createdById String
+    siteDiaries SiteDiary[]
+    users       UsersOnProjects[]
+    createdAt   DateTime          @default(now())
+    updatedAt   DateTime          @updatedAt
 
     @@index([createdById])
 }

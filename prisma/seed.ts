@@ -6,15 +6,38 @@ import { prisma } from "../src/server/db";
 async function main() {
   const userId = env.TEST_USER_ID;
 
+  // delete all existing "projects" and "createdProjects" for userId
+  await prisma.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      projects: {
+        deleteMany: {},
+      },
+      createdProjects: {
+        deleteMany: {},
+      },
+    },
+  });
+
   // create 1 project
   const project = await prisma.project.create({
     data: {
       name: faker.company.name(),
       createdBy: {
         connect: {
-          id: userId,
+          id: userId, // link "createdProjects" on the User model
         },
       },
+    },
+  });
+
+  // link "projects" on the user model
+  await prisma.usersOnProjects.create({
+    data: {
+      userId: userId,
+      projectId: project.id,
     },
   });
 
@@ -36,7 +59,7 @@ async function main() {
         },
         plants: {
           create: {
-            type: "Laborer type",
+            type: "Plant type",
             amount: Number(faker.random.numeric(1)),
             createdBy: {
               connect: {
