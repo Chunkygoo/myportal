@@ -1,4 +1,4 @@
-import Twitter from "../svg/oauth/Twitter";
+import { Twitter } from "@styled-icons/bootstrap/Twitter";
 
 const TwitterButton = () => {
   return (
@@ -8,7 +8,7 @@ const TwitterButton = () => {
     >
       <span className="flex items-center">
         <span className="sr-only">Sign in with</span>
-        <Twitter />
+        <Twitter className="mr-2 h-6 w-6" />
         <span>Twitter</span>
       </span>
     </button>

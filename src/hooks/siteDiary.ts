@@ -1,7 +1,7 @@
 import type { siteDiary } from "../pages/projects/[projectId]/site-diary/[siteDiaryId]";
 import { api } from "../utils/api";
 
-export const useGetSiteDiaryQuery = ({
+export const useGetSiteDiary = ({
   siteDiaryId,
   initialData,
 }: {

@@ -14,8 +14,6 @@ export default function PermissionToProject({
     projectId: projectId,
   });
 
-  console.log(hasPermission);
-
   if (isLoading) {
     return (
       <div className="max-h-screen-xl flex min-h-[70vh]">

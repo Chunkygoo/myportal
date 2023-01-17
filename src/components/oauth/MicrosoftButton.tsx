@@ -1,4 +1,4 @@
-import Microsoft from "../svg/oauth/Microsoft";
+import { Microsoft } from "@styled-icons/bootstrap/Microsoft";
 
 const MicrosoftButton = () => {
   return (
@@ -8,7 +8,7 @@ const MicrosoftButton = () => {
     >
       <span className="flex items-center">
         <span className="sr-only">Sign in with</span>
-        <Microsoft />
+        <Microsoft className="mr-2 h-6 w-6" />
         <span>Microsoft</span>
       </span>
     </button>

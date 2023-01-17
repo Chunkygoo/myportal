@@ -1,4 +1,4 @@
-import Facebook from "../svg/oauth/Facebook";
+import { FacebookCircle } from "@styled-icons/boxicons-logos";
 
 const FacebookButton = () => {
   return (
@@ -8,7 +8,7 @@ const FacebookButton = () => {
     >
       <span className="flex items-center">
         <span className="sr-only">Sign in with</span>
-        <Facebook />
+        <FacebookCircle className="mr-2 h-8 w-8" />
         <span>Facebook</span>
       </span>
     </button>

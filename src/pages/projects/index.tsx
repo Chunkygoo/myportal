@@ -1,21 +1,27 @@
 import { useRouter } from "next/router";
 import SessionAuth from "../../components/auth/SessionAuth";
-import { useGetMyProjectsQuery } from "../../hooks/me";
+import CreateButton from "../../components/project/CreateButton";
+import DeleteButton from "../../components/project/DeleteButton";
+import EditButton from "../../components/project/EditButton";
+
+import { useGetMyProjects } from "../../hooks/projects";
 
 const Projects = () => {
   const router = useRouter();
-  const { projects, isLoading, isError } = useGetMyProjectsQuery();
+  const { projects, isLoading, isError } = useGetMyProjects();
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error!</div>;
   return (
     <SessionAuth>
       <div className="flex h-screen">
         <div className="m-auto">
-          <div className="text-lg font-medium">Projects</div>
-          <ul>
-            {projects?.map((project) => (
-              <li
-                key={project.id}
+          <div className="flex justify-between">
+            <div className="text-lg font-medium">Projects</div>
+            <CreateButton />
+          </div>
+          {projects?.map((project) => (
+            <div key={project.id} className="flex">
+              <span
                 className="w-full bg-blue-500 text-white hover:bg-blue-200 hover:text-blue-500"
                 onClick={() => void router.push(`/projects/${project.id}`)}
               >
@@ -24,9 +30,11 @@ const Projects = () => {
                   <span className="mr-4">{project.createdBy}</span>
                   <span className="mr-4">{project.createdAt}</span>
                 </div>
-              </li>
-            ))}
-          </ul>
+              </span>
+              <EditButton project={project} />
+              <DeleteButton projectId={project.id} />
+            </div>
+          ))}
         </div>
       </div>
     </SessionAuth>

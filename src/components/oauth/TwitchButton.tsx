@@ -1,4 +1,4 @@
-import Twitch from "../svg/oauth/Twitch";
+import { Twitch } from "@styled-icons/bootstrap/Twitch";
 
 const TwitchButton = () => {
   return (
@@ -8,7 +8,7 @@ const TwitchButton = () => {
     >
       <span className="flex items-center">
         <span className="sr-only">Sign in with</span>
-        <Twitch />
+        <Twitch className="mr-2 h-6 w-6" />
         <span>Twitch</span>
       </span>
     </button>

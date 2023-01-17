@@ -7,51 +7,6 @@ export const hasPermissionToProjectSchema = z.object({
 });
 
 export const meRouter = createTRPCRouter({
-  getProjects: protectedProcedure.query(async ({ ctx }) => {
-    try {
-      const loggedInUser = await ctx.prisma.user.findFirst({
-        where: {
-          id: ctx.session.user?.id,
-        },
-        include: {
-          projects: {
-            select: {
-              project: {
-                select: {
-                  id: true,
-                  name: true,
-                  createdAt: true,
-                  createdBy: {
-                    select: {
-                      name: true,
-                    },
-                  },
-                },
-              },
-            },
-          },
-        },
-      });
-
-      const projects = loggedInUser?.projects.map((projectItem) => {
-        const project = projectItem.project;
-        return {
-          id: project.id,
-          name: project.name,
-          createdBy: project.createdBy.name,
-          createdAt: project.createdAt.toLocaleDateString(),
-        };
-      });
-
-      return projects;
-    } catch (error) {
-      throw new TRPCError({
-        code: "BAD_REQUEST",
-        message: (error as Error).message,
-        cause: error,
-      });
-    }
-  }),
   hasPermissionToProject: protectedProcedure
     .input(hasPermissionToProjectSchema)
     .query(async ({ ctx, input }) => {

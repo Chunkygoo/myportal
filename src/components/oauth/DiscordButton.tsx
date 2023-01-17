@@ -1,5 +1,5 @@
+import { Discord } from "@styled-icons/bootstrap/Discord";
 import { signIn } from "next-auth/react";
-import Discord from "../svg/oauth/Discord";
 
 const DiscordButton = () => {
   return (
@@ -10,7 +10,7 @@ const DiscordButton = () => {
     >
       <span className="flex items-center">
         <span className="sr-only">Sign in with</span>
-        <Discord />
+        <Discord className="mr-2 h-6 w-6" />
         <span>Discord</span>
       </span>
     </button>

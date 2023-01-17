@@ -1,5 +1,5 @@
+import { Google } from "@styled-icons/bootstrap/Google";
 import { signIn } from "next-auth/react";
-import Google from "../svg/oauth/Google";
 
 const GoogleButton = () => {
   return (
@@ -10,7 +10,7 @@ const GoogleButton = () => {
     >
       <span className="flex items-center">
         <span className="sr-only">Sign in with</span>
-        <Google />
+        <Google className="mr-2 h-6 w-6" />
         <span>Google</span>
       </span>
     </button>

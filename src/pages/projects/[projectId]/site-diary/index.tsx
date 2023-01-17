@@ -2,7 +2,7 @@ import { type GetStaticPropsContext } from "next";
 import { useRouter } from "next/router";
 import PermissionToProject from "../../../../components/auth/PermissionToProject";
 import SessionAuth from "../../../../components/auth/SessionAuth";
-import { useGetSiteDiaresQuery } from "../../../../hooks/projects";
+import { useGetSiteDiares } from "../../../../hooks/projects";
 import { prisma } from "../../../../server/db";
 
 export type siteDiary = {
@@ -19,7 +19,7 @@ const SiteDiary = ({
 }) => {
   const router = useRouter();
   const projectId = router.query.projectId as string;
-  const { siteDiaries, isError } = useGetSiteDiaresQuery({
+  const { siteDiaries, isError } = useGetSiteDiares({
     projectId: projectId,
     initialData: siteDiariesFromStaticProps,
   });
