@@ -15,7 +15,7 @@ const CreateButton = () => {
   const { createProject } = useCreateProject();
   const onSubmit = (
     data: FieldValues,
-    e: BaseSyntheticEvent<object, any, any> | undefined
+    e: BaseSyntheticEvent<object, unknown, unknown> | undefined
   ) => {
     e?.preventDefault();
     setOpen(false);

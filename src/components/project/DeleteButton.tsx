@@ -1,6 +1,5 @@
 import * as AlertDialog from "@radix-ui/react-alert-dialog";
 import { Delete } from "@styled-icons/fluentui-system-filled";
-import { useRouter } from "next/router";
 import { useDeleteProject } from "../../hooks/projects";
 
 const DeleteButton = ({
@@ -10,7 +9,6 @@ const DeleteButton = ({
   projectId: string;
   navigateBack?: boolean;
 }) => {
-  const router = useRouter();
   const { deleteProject } = useDeleteProject();
   return (
     <AlertDialog.Root>
